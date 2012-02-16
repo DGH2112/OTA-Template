@@ -1,0 +1,44 @@
+Package OTATemplate2009;
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD OFF}
+{$DEFINE EUREKALOG}
+{$DEFINE EUREKALOG_VER6}
+{$DEFINE DEBUG}
+
+requires
+  vcl,
+  designide;
+
+contains
+  InitialiseOTAInterfaces in '..\Source\InitialiseOTAInterfaces.pas',
+  WizardInterface in '..\Source\WizardInterface.pas',
+  KeyboardBindingInterface in '..\Source\KeyboardBindingInterface.pas',
+  IDENotifierInterface in '..\Source\IDENotifierInterface.pas',
+  UtilityFunctions in '..\Source\UtilityFunctions.pas',
+  CompilerNotifierInterface in '..\Source\CompilerNotifierInterface.pas',
+  EditorNotifierInterface in '..\Source\EditorNotifierInterface.pas',
+  OptionsForm in '..\Source\OptionsForm.pas' {frmOptions};
+
+End.
+
