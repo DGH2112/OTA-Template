@@ -38,6 +38,8 @@ contains
   UtilityFunctions in '..\Source\UtilityFunctions.pas',
   CompilerNotifierInterface in '..\Source\CompilerNotifierInterface.pas',
   EditorNotifierInterface in '..\Source\EditorNotifierInterface.pas',
-  OptionsForm in '..\Source\OptionsForm.pas' {frmOptions};
+  OptionsForm in '..\Source\OptionsForm.pas' {frmOptions},
+  ItemSelectionForm in '..\Source\ItemSelectionForm.pas' {frmItemSelectionForm},
+  SelectMethodUnit in '..\Source\SelectMethodUnit.pas';
 
 End.
