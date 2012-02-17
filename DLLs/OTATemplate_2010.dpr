@@ -23,7 +23,9 @@ uses
   IDENotifierInterface in '..\Source\IDENotifierInterface.pas',
   CompilerNotifierInterface in '..\Source\CompilerNotifierInterface.pas',
   EditorNotifierInterface in '..\Source\EditorNotifierInterface.pas',
-  OptionsForm in '..\Source\OptionsForm.pas' {frmOptions};
+  OptionsForm in '..\Source\OptionsForm.pas' {frmOptions},
+  SelectMethodUnit in '..\Source\SelectMethodUnit.pas',
+  ItemSelectionForm in '..\Source\ItemSelectionForm.pas' {frmItemSelectionForm};
 
 {$R *.res}
 

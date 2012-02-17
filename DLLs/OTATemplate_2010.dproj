@@ -61,6 +61,10 @@
 			<DCCReference Include="..\Source\OptionsForm.pas">
 				<Form>frmOptions</Form>
 			</DCCReference>
+			<DCCReference Include="..\Source\SelectMethodUnit.pas"/>
+			<DCCReference Include="..\Source\ItemSelectionForm.pas">
+				<Form>frmItemSelectionForm</Form>
+			</DCCReference>
 			<None Include="..\Source\CompilerDefinitions.inc"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
