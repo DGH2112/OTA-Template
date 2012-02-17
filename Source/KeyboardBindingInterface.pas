@@ -14,6 +14,8 @@ Type
   {$IFDEF D2005} Strict {$ENDIF} Protected
     Procedure AddBreakPoint(Const Context: IOTAKeyContext;
       KeyCode: TShortcut; Var BindingResult: TKeyBindingResult);
+    Procedure SelectMethodExecute(Const Context: IOTAKeyContext;
+      KeyCode: TShortcut; Var BindingResult: TKeyBindingResult);
   Public
     Procedure BindKeyboard(Const BindingServices: IOTAKeyBindingServices);
     Function GetBindingType: TBindingType;
@@ -27,7 +29,8 @@ Uses
   SysUtils,
   Dialogs,
   Menus,
-  UtilityFunctions;
+  UtilityFunctions,
+  SelectMethodUnit;
 
 { TKeybindingTemplate }
 
@@ -36,6 +39,7 @@ Procedure TKeybindingTemplate.BindKeyboard(Const BindingServices: IOTAKeyBinding
 Begin
   BindingServices.AddKeyBinding([TextToShortcut('Ctrl+Shift+F8')], AddBreakPoint, Nil);
   BindingServices.AddKeyBinding([TextToShortcut('Ctrl+Alt+F8')], AddBreakPoint, Nil);
+  BindingServices.AddKeyBinding([TextToShortcut('Ctrl+Shift+Alt+F9')], SelectMethodExecute, Nil);
 End;
 
 Procedure TKeybindingTemplate.AddBreakPoint(Const Context: IOTAKeyContext;
@@ -86,6 +90,14 @@ Function TKeybindingTemplate.GetName: String;
 
 Begin
   Result := 'My Partial Keyboard Bindings';
+End;
+
+Procedure TKeybindingTemplate.SelectMethodExecute(Const Context: IOTAKeyContext;
+  KeyCode: TShortcut; Var BindingResult: TKeyBindingResult);
+
+Begin
+  SelectMethod;
+  BindingResult := krHandled;
 End;
 
 End.
