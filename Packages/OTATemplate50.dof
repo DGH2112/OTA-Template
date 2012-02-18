@@ -8,12 +8,12 @@ F=0
 G=1
 H=1
 I=1
-J=1
+J=0
 K=0
 L=1
 M=0
 N=1
-O=1
+O=0
 P=1
 Q=0
 R=0
@@ -21,7 +21,7 @@ S=0
 T=0
 U=0
 V=1
-W=0
+W=1
 X=1
 Y=1
 Z=1
@@ -39,24 +39,24 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template
-UnitOutputDir=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template\0005DCUs
-PackageDLLOutputDir=
+OutputDir=
+UnitOutputDir=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template\0005DCUs\
+PackageDLLOutputDir=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template\
 PackageDCPOutputDir=
 SearchPath=
-Packages=Vcl50;dsnIDE50
-Conditionals=
+Packages=
+Conditionals=EUREKALOG;EUREKALOG_VER6;DEBUG
 DebugSourceDirs=
-UsePackages=1
+UsePackages=0
 [Parameters]
-RunParams=-rOTATemplateDPR
+RunParams=-rOTATemplateBPL
 HostApplication=C:\Program Files (x86)\Borland\Delphi5\Bin\delphi32.exe
 [Language]
 ActiveLang=
 ProjectLang=$00000809
 RootDir=
 [Version Info]
-IncludeVerInfo=0
+IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=1
 MinorVer=0
@@ -87,16 +87,18 @@ Item0=EUREKALOG;EUREKALOG_VER6;DEBUG
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlUnitOutputDirectory]
-Count=3
-Item0=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template\0005DCUs
-Item1=..\0005DCUs\
-Item2=$(DELPHI)\0005DCUs\
+Count=4
+Item0=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template\0005DCUs\
+Item1=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template\0005DCUs
+Item2=..\0005DCUs\
+Item3=$(DELPHI)\0005DCUs\
 [HistoryLists\hlOutputDirectorry]
 Count=3
 Item0=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template
 Item1=..\
 Item2=$(DELPHI)\
 [HistoryLists\hlBPLOutput]
-Count=2
-Item0=$(DELPHI)\
-Item1=..\
+Count=3
+Item0=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template\
+Item1=$(DELPHI)\
+Item2=..\
