@@ -24,11 +24,13 @@ uses
   EditorNotifierInterface in '..\Source\EditorNotifierInterface.pas',
   OptionsForm in '..\Source\OptionsForm.pas' {frmOptions},
   SelectMethodUnit in '..\Source\SelectMethodUnit.pas',
-  ItemSelectionForm in '..\Source\ItemSelectionForm.pas' {frmItemSelectionForm};
+  ItemSelectionForm in '..\Source\ItemSelectionForm.pas' {frmItemSelectionForm},
+  RepositoryWizardInterface in '..\Source\RepositoryWizardInterface.pas';
 
 {$R *.res}
 
 begin
 end.
+
 
 
