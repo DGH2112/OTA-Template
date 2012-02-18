@@ -9,18 +9,37 @@ uses
 {$INCLUDE CompilerDefinitions.inc}
 
 type
-  TProjectType = (ptPackage, ptDLL);
+  TProjectType = (
+    //ptApplication,
+    ptPackage,
+    ptDLL
+  );
   TAdditionalModule = (
+    amCompilerDefintions,
     amInitialiseOTAInterface,
     amUtilityFunctions,
+    amWizardInterface,
     amCompilerNotifierInterface,
     amEditorNotifierInterface,
-    amIDENotfierInterface,
-    amKeybaordBindingsInterface,
-    amReportioryWizardInterface,
-    amProjectCreatorInterface
+    amIDENotifierInterface,
+    amKeyboardBindingInterface,
+    amRepositoryWizardInterface,
+    amProjectCreatorInterface,
+    amModuleCreatorInterface
   );
   TAdditionalModules = Set Of TAdditionalModule;
+
+  TProjectWizardInfo = Record
+    FProjectName       : String;
+    FProjectType       : TProjectType;
+    FAdditionalModules : TAdditionalModules;
+    FWizardName        : String;
+    FWizardIDString    : String;
+    FWizardMenu        : Boolean;
+    FWizardMenuText    : String;
+    FWizardAuthor      : String;
+    FWizardDescription : String;
+  End;
 
   TfrmRepositoryWizard = class(TForm)
     Image1: TImage;
@@ -31,6 +50,17 @@ type
     lbxAdditionalModules: TCheckListBox;
     btnOK: TBitBtn;
     btnCancel: TBitBtn;
+    cbxMenuWizard: TCheckBox;
+    lblWizardName: TLabel;
+    edtWizardName: TEdit;
+    edtWizardIDString: TEdit;
+    lblWizardIDString: TLabel;
+    edtWizardMenuText: TEdit;
+    lblMenuText: TLabel;
+    edtWizardAuthor: TEdit;
+    lblWizardAuthor: TLabel;
+    lblWizardDescription: TLabel;
+    memWizardDescription: TMemo;
     procedure btnOKClick(Sender: TObject);
     procedure edtProjectNameKeyPress(Sender: TObject; var Key: Char);
     procedure lbxAdditionalModulesClickCheck(Sender: TObject);
@@ -38,8 +68,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    Class Function Execute(var strProjectName : String; var enumProjectType : TProjectType;
-      var enumAdditionalModules : TAdditionalModules) : Boolean;
+    Class Function Execute(var ProjectWizardInfo : TProjectWizardInfo) : Boolean;
   end;
 
 implementation
@@ -51,6 +80,17 @@ Uses
 {$R *.dfm}
 
 procedure TfrmRepositoryWizard.btnOKClick(Sender: TObject);
+
+  Procedure CheckTextField(strText, strMsg : String);
+
+  Begin
+    If strText = '' Then
+      Begin
+        MessageDlg(strMsg, mtError, [mbOK], 0);
+        ModalResult := mrNone;
+        Abort;
+      End;
+  End;
 
 Var
   boolProjectNameOK: Boolean;
@@ -89,6 +129,9 @@ begin
         [edtProjectName.Text]), mtError, [mbOK], 0);
       ModalResult := mrNone;
     End;
+  CheckTextField(edtWizardName.Text, 'You must specify a Wizard Name.');
+  CheckTextField(edtWizardIDString.Text, 'You must specify a Wizard ID String.');
+  CheckTextField(edtWizardMenuText.Text, 'You must specify a Wizard Menu Text.');
 end;
 
 procedure TfrmRepositoryWizard.edtProjectNameKeyPress(Sender: TObject; var Key: Char);
@@ -101,51 +144,69 @@ begin
     Key := #0;
 end;
 
-Class Function TfrmRepositoryWizard.Execute(var strProjectName : String;
-  var enumProjectType : TProjectType;
-  var enumAdditionalModules : TAdditionalModules): Boolean;
+Class Function TfrmRepositoryWizard.Execute(var ProjectWizardInfo : TProjectWizardInfo): Boolean;
 
 Const
+  ProjectTypes : Array[Low(TProjectType)..High(TProjectType)] Of String = (
+    //'Application',
+    'Package',
+    'DLL'
+  );
   AdditionalModules : Array[Low(TAdditionalModule)..High(TAdditionalModule)] Of String = (
+    'Compiler Definitions (Default)',
     'Initialise OTA Interface (Default)',
     'OTA Utility Functions (Default)',
+    'Wizard Interface Template',
     'Compiler Notifier Interface Template',
     'Editor Notifier Interface Template',
     'IDE Notifier Interface Template',
     'Keyboard Bindings Interface Template',
     'Repository Wizard Interface Template',
-    'Project Creator Interface Template'
+    'Project Creator Interface Template',
+    'Module Creator Interface Template'
   );
 
 Var
   i : TAdditionalModule;
   iIndex: Integer;
+  j: TProjectType;
 
 Begin
   Result := False;
   With TfrmRepositoryWizard.Create(Nil) Do
     Try
+      rgpProjectType.Items.Clear;
+      For j := Low(TProjectType) To High(TProjectType) Do
+        rgpProjectType.Items.Add(ProjectTypes[j]);
       edtProjectName.Text := 'MyOTAProject';
       rgpProjectType.ItemIndex := 0;
+      edtWizardName.Text := 'My OTA Wizard';
+      edtWizardIDString.Text := 'My.OTA.Wizard';
+      edtWizardMenuText.Text := 'My OTA Wizard';
+      edtWizardAuthor.Text := 'Wizard Author';
+      memWizardDescription.Text := 'Wizard Description';
       // Default Modules
-      enumAdditionalModules := [amInitialiseOTAInterface..amUtilityFunctions];
+      ProjectWizardInfo.FAdditionalModules := [amCompilerDefintions..amWizardInterface];
       For i := Low(TAdditionalModule) To High(TAdditionalModule) Do
         Begin
           iIndex := lbxAdditionalModules.Items.Add(AdditionalModules[i]);
-          lbxAdditionalModules.Checked[iIndex] := i In enumAdditionalModules;
+          lbxAdditionalModules.Checked[iIndex] := i In ProjectWizardInfo.FAdditionalModules;
         End;
       If ShowModal = mrOK Then
         Begin
-          strProjectName := edtProjectName.Text;
-          Case rgpProjectType.ItemIndex Of
-            0: enumProjectType := ptPackage;
-            1: enumProjectType := ptDLL;
-          End;
+          ProjectWizardInfo.FProjectName := edtProjectName.Text;
+          ProjectWizardInfo.FProjectType := TProjectType(rgpProjectType.ItemIndex);
+          ProjectWizardInfo.FWizardName := edtWizardName.Text;
+          ProjectWizardInfo.FWizardIDString := edtWizardIDString.Text;
+          ProjectWizardInfo.FWizardMenu := cbxMenuWizard.Checked;
+          ProjectWizardInfo.FWizardMenuText := edtWizardMenuText.Text;
+          ProjectWizardInfo.FWizardAuthor := edtWizardAuthor.Text;
+          ProjectWizardInfo.FWizardDescription := memWizardDescription.Text;
           For i := Low(TAdditionalModule) To High(TAdditionalModule) Do
             If lbxAdditionalModules.Checked[Integer(i)] Then
-              Include(enumAdditionalModules, i)
+              Include(ProjectWizardInfo.FAdditionalModules, i)
             Else
-              Exclude(enumAdditionalModules, i);
+              Exclude(ProjectWizardInfo.FAdditionalModules, i);
           Result := True;
         End;
     Finally
@@ -154,10 +215,13 @@ Begin
 End;
 
 procedure TfrmRepositoryWizard.lbxAdditionalModulesClickCheck(Sender: TObject);
+
+Var
+  iModule: TAdditionalModule;
+
 begin
-  // Always ensure the default modules are Checked!
-  lbxAdditionalModules.Checked[0] := True;
-  lbxAdditionalModules.Checked[1] := True;
+  For iModule := amCompilerDefintions To amWizardInterface Do
+    lbxAdditionalModules.Checked[Integer(iModule)] := True;
 end;
 
 end.

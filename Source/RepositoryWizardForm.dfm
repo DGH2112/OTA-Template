@@ -4,8 +4,8 @@ object frmRepositoryWizard: TfrmRepositoryWizard
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Repository Wizard'
-  ClientHeight = 292
-  ClientWidth = 479
+  ClientHeight = 468
+  ClientWidth = 544
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object frmRepositoryWizard: TfrmRepositoryWizard
   OldCreateOrder = False
   Position = poScreenCenter
   DesignSize = (
-    479
-    292)
+    544
+    468)
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
@@ -383,15 +383,56 @@ object frmRepositoryWizard: TfrmRepositoryWizard
   end
   object lblAdditionalInterfaces: TLabel
     Left = 151
-    Top = 127
+    Top = 329
     Width = 104
     Height = 13
-    Caption = 'Additional Interfaces:'
+    Caption = '&Additional Interfaces:'
+    FocusControl = lbxAdditionalModules
+  end
+  object lblWizardName: TLabel
+    Left = 151
+    Top = 106
+    Width = 63
+    Height = 13
+    Caption = 'Wizard &Name'
+    FocusControl = edtWizardName
+  end
+  object lblWizardIDString: TLabel
+    Left = 151
+    Top = 133
+    Width = 78
+    Height = 13
+    Caption = 'Wizard &ID String'
+    FocusControl = edtWizardIDString
+  end
+  object lblMenuText: TLabel
+    Left = 151
+    Top = 183
+    Width = 51
+    Height = 13
+    Caption = '&Menu Text'
+    FocusControl = edtWizardMenuText
+  end
+  object lblWizardAuthor: TLabel
+    Left = 151
+    Top = 210
+    Width = 69
+    Height = 13
+    Caption = 'Wizard &Author'
+    FocusControl = edtWizardAuthor
+  end
+  object lblWizardDescription: TLabel
+    Left = 151
+    Top = 237
+    Width = 89
+    Height = 13
+    Caption = 'Wizard& Description'
+    FocusControl = memWizardDescription
   end
   object edtProjectName: TEdit
     Left = 151
     Top = 27
-    Width = 239
+    Width = 304
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
@@ -401,10 +442,11 @@ object frmRepositoryWizard: TfrmRepositoryWizard
   object rgpProjectType: TRadioGroup
     Left = 151
     Top = 54
-    Width = 239
-    Height = 67
+    Width = 304
+    Height = 43
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Project Type'
+    Columns = 2
     Items.Strings = (
       '&Package'
       '&Dynamic Linked Library')
@@ -412,16 +454,16 @@ object frmRepositoryWizard: TfrmRepositoryWizard
   end
   object lbxAdditionalModules: TCheckListBox
     Left = 151
-    Top = 146
-    Width = 239
-    Height = 138
+    Top = 348
+    Width = 304
+    Height = 112
     OnClickCheck = lbxAdditionalModulesClickCheck
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 13
-    TabOrder = 2
+    TabOrder = 8
   end
   object btnOK: TBitBtn
-    Left = 396
+    Left = 461
     Top = 8
     Width = 75
     Height = 25
@@ -429,11 +471,11 @@ object frmRepositoryWizard: TfrmRepositoryWizard
     DoubleBuffered = True
     Kind = bkOK
     ParentDoubleBuffered = False
-    TabOrder = 3
+    TabOrder = 9
     OnClick = btnOKClick
   end
   object btnCancel: TBitBtn
-    Left = 396
+    Left = 461
     Top = 39
     Width = 75
     Height = 25
@@ -441,6 +483,62 @@ object frmRepositoryWizard: TfrmRepositoryWizard
     DoubleBuffered = True
     Kind = bkCancel
     ParentDoubleBuffered = False
+    TabOrder = 10
+  end
+  object cbxMenuWizard: TCheckBox
+    Left = 151
+    Top = 157
+    Width = 304
+    Height = 17
+    Alignment = taLeftJustify
+    Anchors = [akLeft, akTop, akRight]
+    Caption = '&Implement an IOTAMenuWizard'
     TabOrder = 4
+  end
+  object edtWizardName: TEdit
+    Left = 248
+    Top = 103
+    Width = 207
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 2
+    Text = 'edtWizardName'
+  end
+  object edtWizardIDString: TEdit
+    Left = 248
+    Top = 130
+    Width = 207
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 3
+    Text = 'edtWizardIDString'
+  end
+  object edtWizardMenuText: TEdit
+    Left = 248
+    Top = 180
+    Width = 207
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 5
+    Text = 'edtWizardMenuText'
+  end
+  object edtWizardAuthor: TEdit
+    Left = 248
+    Top = 207
+    Width = 207
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 6
+    Text = 'edtWizardAuthor'
+  end
+  object memWizardDescription: TMemo
+    Left = 248
+    Top = 234
+    Width = 207
+    Height = 89
+    Anchors = [akLeft, akTop, akRight]
+    Lines.Strings = (
+      'memWizardDescription')
+    TabOrder = 7
   end
 end
