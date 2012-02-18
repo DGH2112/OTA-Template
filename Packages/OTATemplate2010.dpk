@@ -43,6 +43,7 @@ contains
   SelectMethodUnit in '..\Source\SelectMethodUnit.pas',
   RepositoryWizardInterface in '..\Source\RepositoryWizardInterface.pas',
   RepositoryWizardForm in '..\Source\RepositoryWizardForm.pas' {frmRepositoryWizard},
-  ProjectCreatorInterface in '..\Source\ProjectCreatorInterface.pas';
+  ProjectCreatorInterface in '..\Source\ProjectCreatorInterface.pas',
+  ModuleCreatorInterface in '..\Source\ModuleCreatorInterface.pas';
 
 End.
