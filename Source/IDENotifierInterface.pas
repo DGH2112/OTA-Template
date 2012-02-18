@@ -81,7 +81,7 @@ End;
 Procedure TIDENotifierTemplate.AfterCompile(Succeeded, IsCodeInsight: Boolean);
 
 Begin
-  OutputMessage(Format('AfterCompile: Succeeded=  %d, IsCodeInsight = %s', [
+  OutputMessage(Format('AfterCompile: Succeeded=  %s, IsCodeInsight = %s', [
     strBoolean[Succeeded], strBoolean[IsCodeInsight]])
     {$IFDEF D0006}, strIDENotifierMessages {$ENDIF});
 End;
@@ -116,7 +116,7 @@ Procedure TIDENotifierTemplate.AfterCompile(Const Project: IOTAProject;
   Succeeded, IsCodeInsight: Boolean);
 
 Begin
-  OutputMessage(Format('AfterCompile: Project: %s, Succeeded=  %d, IsCodeInsight = %s', [
+  OutputMessage(Format('AfterCompile: Project: %s, Succeeded=  %s, IsCodeInsight = %s', [
     ExtractFileName(Project.FileName), strBoolean[Succeeded], strBoolean[IsCodeInsight]]),
     strIDENotifierMessages);
 End;
