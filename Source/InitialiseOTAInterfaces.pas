@@ -9,6 +9,7 @@ Uses
 
 {$R '..\SplashScreenIcon.res' '..\SplashScreenIcon.RC'}
 {$R '..\RepositoryWizardResources.res' '..\RepositoryWizardResources.RC'}
+{$R '..\ProjectTemplateResources.RES' '..\ProjectTemplateResources.RC'}
 
   Procedure Register;
 
@@ -36,24 +37,27 @@ Uses
 Type
   TWizardType = (wtPackageWizard, wtDLLWizard);
 
+Const
+  iWizardFailState = -1;
+
 Var
   {$IFDEF D2005}
   VersionInfo            : TVersionInfo;
   bmSplashScreen         : HBITMAP;
   {$ENDIF}
-  iWizardIndex           : Integer = 0;
+  iWizardIndex           : Integer = iWizardFailState;
   {$IFDEF D0006}
-  iAboutPluginIndex      : Integer = 0;
+  iAboutPluginIndex      : Integer = iWizardFailState;
   {$ENDIF}
-  iKeyBindingIndex       : Integer = 0;
-  iIDENotfierIndex       : Integer = 0;
+  iKeyBindingIndex       : Integer = iWizardFailState;
+  iIDENotfierIndex       : Integer = iWizardFailState;
   {$IFDEF D2010}
-  iCompilerIndex         : Integer = 0;
+  iCompilerIndex         : Integer = iWizardFailState;
   {$ENDIF}
   {$IFDEF D0006}
-  iEditorIndex           : Integer = 0;
+  iEditorIndex           : Integer = iWizardFailState;
   {$ENDIF}
-  iRepositoryWizardIndex : Integer = 0;
+  iRepositoryWizardIndex : Integer = iWizardFailState;
 
 {$IFDEF D2005}
 Const
@@ -140,30 +144,30 @@ Initialization
   {$ENDIF}
 Finalization
   // Remove Wizard Interface
-  If iWizardIndex > 0 Then
+  If iWizardIndex > iWizardFailState Then
     (BorlandIDEServices As IOTAWizardServices).RemoveWizard(iWizardIndex);
   {$IFDEF D2005}
   // Remove Aboutbox Plugin Interface
-  If iAboutPluginIndex > 0 Then
+  If iAboutPluginIndex > iWizardFailState Then
     (BorlandIDEServices As IOTAAboutBoxServices).RemovePluginInfo(iAboutPluginIndex);
   {$ENDIF}
   // Remove Keyboard Binding Interface
-  If iKeyBindingIndex > 0 Then
+  If iKeyBindingIndex > iWizardFailState Then
     (BorlandIDEServices As IOTAKeyboardServices).RemoveKeyboardBinding(iKeyBindingIndex);
   // Remove IDE Notifier Interface
-  If iIDENotfierIndex > 0 Then
+  If iIDENotfierIndex > iWizardFailState Then
     (BorlandIDEServices As IOTAServices).RemoveNotifier(iIDENotfierIndex);
   {$IFDEF D2010}
   // Remove Compiler Notifier Interface
-  If iCompilerIndex <> 0 Then
+  If iCompilerIndex <> iWizardFailState Then
     (BorlandIDEServices As IOTACompileServices).RemoveNotifier(iCompilerIndex);
   {$ENDIF}
   {$IFDEF D2005}
   // Remove Editor Notifier Interface
-  If iEditorIndex <> 0 Then
+  If iEditorIndex <> iWizardFailState Then
     (BorlandIDEServices As IOTAEditorServices).RemoveNotifier(iEditorIndex);
   {$ENDIF}
   // Remove Repository Wizard Interface
-  If iRepositoryWizardIndex <> 0 Then
+  If iRepositoryWizardIndex <> iWizardFailState Then
     (BorlandIDEServices As IOTAWizardServices).RemoveWizard(iRepositoryWizardIndex);
 End.
