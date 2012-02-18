@@ -68,6 +68,7 @@ Type
   Function AddMsg(strText: String; boolGroup, boolAutoScroll: Boolean;
     strFontName: String; iForeColour: TColor; fsStyle: TFontStyles;
     iBackColour: TColor = clWindow; ptrParent: Pointer = Nil): Pointer;
+  Procedure OutputText(Writer : IOTAEditWriter; iIndent : Integer; strText : String);
 
 Implementation
 
@@ -321,6 +322,16 @@ Begin
         AddCustomMessage(M As IOTACustomMessage);
         {$ENDIF}
     End;
+End;
+
+Procedure OutputText(Writer : IOTAEditWriter; iIndent : Integer; strText : String);
+
+Begin
+  {$IFNDEF D2009}
+  Writer.Insert(PAnsiChar(StringOfChar(#32, iIndent) + strText));
+  {$ELSE}
+  Writer.Insert(PAnsiChar(AnsiString(StringOfChar(#32, iIndent) + strText)));
+  {$ENDIF}
 End;
 
 { TCustomMessage Methods }
