@@ -28,7 +28,8 @@ Type
 Function IsMethod(strLine : String) : Boolean;
 
 Const
-  strMethods : Array[1..4] Of String = ('procedure', 'function', 'constuctor', 'destructor');
+  strMethods : Array[1..4] Of String = ('procedure ', 'function ', 'constuctor ',
+    'destructor ');
 
 Var
   i : Integer;
@@ -84,13 +85,58 @@ Begin
     End;
 End;
 
+Function InsertComment(slItems : TStringList; iIndex : Integer) : TOTAEditPos;
+
+Var
+  recItemPos : TItemPosition;
+  SE: IOTASourceEditor;
+  Writer: IOTAEditWriter;
+  i: Integer;
+  iIndent: Integer;
+  iPosition: Integer;
+  CharPos : TOTACharPos;
+
+Begin
+  recItemPos.Data := slItems.Objects[iIndex];
+  Result.Line := recItemPos.Line;
+  Result.Col := 1;
+  SE := ActiveSourceEditor;
+  If SE <> Nil Then
+    Begin
+      Writer := SE.CreateUndoableWriter;
+      Try
+        iIndent := 0;
+        For i := 1 To Length(slItems[iIndex]) Do
+          If slItems[iIndex][i] = #32 Then
+            Inc(iIndent)
+          Else
+            Break;
+        CharPos.Line := Result.Line;
+        CharPos.CharIndex := Result.Col - 1;
+        iPosition := SE.EditViews[0].CharPosToPos(CharPos);
+        Writer.CopyTo(iPosition);
+        OutputText(Writer, iIndent, '(**'#13#10);
+        OutputText(Writer, iIndent, #13#10);
+        OutputText(Writer, iIndent, '  Description.'#13#10);
+        OutputText(Writer, iIndent, #13#10);
+        OutputText(Writer, iIndent, '  @precon  '#13#10);
+        OutputText(Writer, iIndent, '  @postcon '#13#10);
+        OutputText(Writer, iIndent, #13#10);
+        OutputText(Writer, iIndent, '**)'#13#10);
+        Inc(Result.Line, 2);
+        Inc(Result.Col, iIndent + 2);
+      Finally
+        Writer := Nil;
+      End;
+    End;
+End;
+
 Procedure SelectMethod;
 
 Var
   slItems: TStringList;
   SE: IOTASourceEditor;
   CP: TOTAEditPos;
-  recItemPos : TItemPosition;
   iIndex: Integer;
 
 Begin
@@ -100,14 +146,12 @@ Begin
     iIndex := TfrmItemSelectionForm.Execute(slItems, 'Select Method');
     If iIndex > -1 Then
       Begin
+        CP := InsertComment(slItems, iIndex);
         SE := ActiveSourceEditor;
         If SE <> Nil Then
           Begin
-            recItemPos.Data := slItems.Objects[iIndex];
-            CP.Line := recItemPos.Line;
-            CP.Col := 1;
             SE.EditViews[0].CursorPos := CP;
-            SE.EditViews[0].Center(CP.Line, 1);
+            SE.EditViews[0].Center(CP.Line, CP.Col);
           End;
       End;
   Finally
