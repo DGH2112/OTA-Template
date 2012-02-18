@@ -26,7 +26,9 @@ uses
   OptionsForm in '..\Source\OptionsForm.pas' {frmOptions},
   SelectMethodUnit in '..\Source\SelectMethodUnit.pas',
   ItemSelectionForm in '..\Source\ItemSelectionForm.pas' {frmItemSelectionForm},
-  RepositoryWizardInterface in '..\Source\RepositoryWizardInterface.pas';
+  RepositoryWizardInterface in '..\Source\RepositoryWizardInterface.pas',
+  RepositoryWizardForm in '..\Source\RepositoryWizardForm.pas' {frmRepositoryWizard},
+  ProjectCreatorInterface in '..\Source\ProjectCreatorInterface.pas';
 
 {$R *.res}
 

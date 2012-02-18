@@ -20,6 +20,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_SYMBOL_DEPRECATED>false</DCC_SYMBOL_DEPRECATED>
 			<DCC_DependencyCheckOutputName>..\OTATemplate_2010.dll</DCC_DependencyCheckOutputName>
 			<DCC_ImageBase>00400000</DCC_ImageBase>
 			<DCC_UsePackage>vcl;rtl;vclx;DesignIDE</DCC_UsePackage>
@@ -67,7 +68,12 @@
 				<Form>frmItemSelectionForm</Form>
 			</DCCReference>
 			<DCCReference Include="..\Source\RepositoryWizardInterface.pas"/>
+			<DCCReference Include="..\Source\RepositoryWizardForm.pas">
+				<Form>frmRepositoryWizard</Form>
+			</DCCReference>
+			<DCCReference Include="..\Source\ProjectCreatorInterface.pas"/>
 			<None Include="..\Source\CompilerDefinitions.inc"/>
+			<None Include="..\Source Code Templates\OTAProjectDLLSourceTemplate.txt"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
@@ -94,7 +100,7 @@
 						<Parameters Name="LoadAllSymbols">True</Parameters>
 						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
 						<Parameters Name="RunParams">-pDelphi -rTemplateDLL</Parameters>
-						<Parameters Name="HostApplication">C:\Program Files (x86)\Embarcadero\RAD Studio\7.0\bin\bds.exe</Parameters>
+						<Parameters Name="HostApplication">C:\Program Files\Embarcadero\RAD Studio\7.0\bin\bds.exe</Parameters>
 					</Parameters>
 					<VersionInfo>
 						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
@@ -102,7 +108,7 @@
 						<VersionInfo Name="MajorVer">1</VersionInfo>
 						<VersionInfo Name="MinorVer">0</VersionInfo>
 						<VersionInfo Name="Release">0</VersionInfo>
-						<VersionInfo Name="Build">6</VersionInfo>
+						<VersionInfo Name="Build">14</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
@@ -114,7 +120,7 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName">Season&apos;s Fall Music Limited (c) 1989</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">A set of examples for the Open Tools API in Delphi</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">1.0.0.6</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">1.0.0.14</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName">OTATemplate</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalCopyright">Season&apos;s Fall Music Limited (c) 1989</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalTrademarks">Season&apos;s Fall Music Limited (c) 1989</VersionInfoKeys>
@@ -137,7 +143,7 @@
 
 <!-- EurekaLog First Line
 [Exception Log]
-EurekaLog Version=6102
+EurekaLog Version=6103
 Activate=1
 Activate Handle=1
 Save Log File=1
