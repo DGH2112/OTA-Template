@@ -3,8 +3,8 @@ object frmOptions: TfrmOptions
   Top = 427
   BorderStyle = bsDialog
   Caption = 'Auto Save Options'
-  ClientHeight = 64
-  ClientWidth = 241
+  ClientHeight = 79
+  ClientWidth = 297
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,55 +14,56 @@ object frmOptions: TfrmOptions
   OldCreateOrder = False
   Position = poScreenCenter
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   object lblAutoSaveInterval: TLabel
-    Left = 8
-    Top = 12
-    Width = 88
-    Height = 13
+    Left = 10
+    Top = 15
+    Width = 108
+    Height = 16
     Caption = 'Auto Save &Interval'
     FocusControl = edtAutosaveInterval
   end
   object edtAutosaveInterval: TEdit
-    Left = 104
-    Top = 8
-    Width = 41
-    Height = 21
+    Left = 128
+    Top = 10
+    Width = 50
+    Height = 24
     TabOrder = 0
     Text = '60'
   end
   object udAutoSaveInterval: TUpDown
-    Left = 145
-    Top = 8
-    Width = 15
-    Height = 21
+    Left = 178
+    Top = 10
+    Width = 19
+    Height = 24
     Associate = edtAutosaveInterval
     Min = 60
     Max = 3600
     Position = 60
     TabOrder = 1
+    Wrap = False
   end
   object cbxPrompt: TCheckBox
-    Left = 8
-    Top = 36
-    Width = 97
-    Height = 17
+    Left = 10
+    Top = 44
+    Width = 119
+    Height = 21
     Caption = '&Prompt'
     TabOrder = 2
   end
   object btnOK: TBitBtn
-    Left = 164
-    Top = 8
-    Width = 75
-    Height = 25
+    Left = 202
+    Top = 10
+    Width = 92
+    Height = 31
     TabOrder = 3
     Kind = bkOK
   end
   object btnCancel: TBitBtn
-    Left = 164
-    Top = 36
-    Width = 75
-    Height = 25
+    Left = 202
+    Top = 44
+    Width = 92
+    Height = 31
     TabOrder = 4
     Kind = bkCancel
   end
