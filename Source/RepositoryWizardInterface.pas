@@ -4,7 +4,8 @@ Interface
 
 Uses
   ToolsAPI,
-  Windows;
+  Windows,
+  RepositoryWizardForm;
 
 {$INCLUDE CompilerDefinitions.inc}
 
@@ -15,7 +16,10 @@ Type
     IOTAProjectWizard
     {$IFDEF D2005}, IOTAProjectWizard100 {$ENDIF})
   {$IFDEF D2005} Strict {$ENDIF} Private
+    FProject : IOTAProject;
   {$IFDEF D2005} Strict {$ENDIF} Protected
+    Procedure CreateProject(strProjectName : String; enumProjectType : TProjectType;
+      enumAdditionalModules : TAdditionalModules);
   Public
     {$IFDEF D2005}
     Constructor Create;
@@ -58,7 +62,9 @@ Implementation
 
 Uses
   Dialogs,
-  UtilityFunctions;
+  UtilityFunctions,
+  SysUtils,
+  ProjectCreatorInterface;
 
 {$IFDEF D0006}
 ResourceString
@@ -83,6 +89,17 @@ Begin
   OutputMessage('BeforeSave' {$IFDEF D0006}, strRepositoryWizardGroup {$ENDIF});
 End;
 
+procedure TRepositoryWizardInterface.CreateProject(strProjectName : String;
+  enumProjectType : TProjectType; enumAdditionalModules : TAdditionalModules);
+
+Var
+  P: TProjectCreator;
+
+begin
+  P := TProjectCreator.Create(strProjectName, enumProjectType);
+  FProject := (BorlandIDEServices As IOTAModuleServices).CreateModule(P) As IOTAProject;
+end;
+
 {$IFDEF D2005}
 Constructor TRepositoryWizardInterface.Create;
 
@@ -103,8 +120,15 @@ End;
 
 Procedure TRepositoryWizardInterface.Execute;
 
+Var
+  strProjectName : String;
+  enumProjectType : TProjectType;
+  enumAdditionalModules : TAdditionalModules;
+
 Begin
-  ShowMessage('Hello OTA Example from the Project Repository Wizard.');
+  If TfrmRepositoryWizard.Execute(strProjectName, enumProjectType,
+    enumAdditionalModules) Then
+    CreateProject(strProjectname, enumProjectType, enumAdditionalModules);
 End;
 
 Function TRepositoryWizardInterface.GetAuthor: String;
