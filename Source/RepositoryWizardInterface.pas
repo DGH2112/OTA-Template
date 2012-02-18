@@ -18,8 +18,7 @@ Type
   {$IFDEF D2005} Strict {$ENDIF} Private
     FProject : IOTAProject;
   {$IFDEF D2005} Strict {$ENDIF} Protected
-    Procedure CreateProject(strProjectName : String; enumProjectType : TProjectType;
-      enumAdditionalModules : TAdditionalModules);
+    Procedure CreateProject(ProjectWizardInfo : TProjectWizardInfo);
   Public
     {$IFDEF D2005}
     Constructor Create;
@@ -89,14 +88,13 @@ Begin
   OutputMessage('BeforeSave' {$IFDEF D0006}, strRepositoryWizardGroup {$ENDIF});
 End;
 
-procedure TRepositoryWizardInterface.CreateProject(strProjectName : String;
-  enumProjectType : TProjectType; enumAdditionalModules : TAdditionalModules);
+procedure TRepositoryWizardInterface.CreateProject(ProjectWizardInfo : TProjectWizardInfo);
 
 Var
   P: TProjectCreator;
 
 begin
-  P := TProjectCreator.Create(strProjectName, enumProjectType);
+  P := TProjectCreator.Create(ProjectWizardInfo);
   FProject := (BorlandIDEServices As IOTAModuleServices).CreateModule(P) As IOTAProject;
 end;
 
@@ -121,14 +119,11 @@ End;
 Procedure TRepositoryWizardInterface.Execute;
 
 Var
-  strProjectName : String;
-  enumProjectType : TProjectType;
-  enumAdditionalModules : TAdditionalModules;
+  ProjectWizardInfo:  TProjectWizardInfo;
 
 Begin
-  If TfrmRepositoryWizard.Execute(strProjectName, enumProjectType,
-    enumAdditionalModules) Then
-    CreateProject(strProjectname, enumProjectType, enumAdditionalModules);
+  If TfrmRepositoryWizard.Execute(ProjectWizardInfo) Then
+    CreateProject(ProjectWizardInfo);
 End;
 
 Function TRepositoryWizardInterface.GetAuthor: String;
