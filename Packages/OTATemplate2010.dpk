@@ -41,6 +41,8 @@ contains
   OptionsForm in '..\Source\OptionsForm.pas' {frmOptions},
   ItemSelectionForm in '..\Source\ItemSelectionForm.pas' {frmItemSelectionForm},
   SelectMethodUnit in '..\Source\SelectMethodUnit.pas',
-  RepositoryWizardInterface in '..\Source\RepositoryWizardInterface.pas';
+  RepositoryWizardInterface in '..\Source\RepositoryWizardInterface.pas',
+  RepositoryWizardForm in '..\Source\RepositoryWizardForm.pas' {frmRepositoryWizard},
+  ProjectCreatorInterface in '..\Source\ProjectCreatorInterface.pas';
 
 End.

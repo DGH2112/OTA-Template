@@ -20,6 +20,8 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_SYMBOL_DEPRECATED>false</DCC_SYMBOL_DEPRECATED>
+			<DCC_DebugDCUs>true</DCC_DebugDCUs>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
 			<DCC_DcuOutput>..\2010DCUs\</DCC_DcuOutput>
@@ -69,6 +71,10 @@
 			</DCCReference>
 			<DCCReference Include="..\Source\SelectMethodUnit.pas"/>
 			<DCCReference Include="..\Source\RepositoryWizardInterface.pas"/>
+			<DCCReference Include="..\Source\RepositoryWizardForm.pas">
+				<Form>frmRepositoryWizard</Form>
+			</DCCReference>
+			<DCCReference Include="..\Source\ProjectCreatorInterface.pas"/>
 			<None Include="..\Source\CompilerDefinitions.inc"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
@@ -95,7 +101,7 @@
 						<Parameters Name="UseLauncher">False</Parameters>
 						<Parameters Name="LoadAllSymbols">True</Parameters>
 						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
-						<Parameters Name="HostApplication">C:\Program Files (x86)\Embarcadero\RAD Studio\7.0\bin\bds.exe</Parameters>
+						<Parameters Name="HostApplication">C:\Program Files\Embarcadero\RAD Studio\7.0\bin\bds.exe</Parameters>
 						<Parameters Name="RunParams">-pDelphi -rTemplateBPL</Parameters>
 					</Parameters>
 					<VersionInfo>
@@ -104,7 +110,7 @@
 						<VersionInfo Name="MajorVer">1</VersionInfo>
 						<VersionInfo Name="MinorVer">0</VersionInfo>
 						<VersionInfo Name="Release">0</VersionInfo>
-						<VersionInfo Name="Build">2</VersionInfo>
+						<VersionInfo Name="Build">12</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
@@ -116,7 +122,7 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName">Season&apos;s Fall Music Limited (c) 1989</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">A set of Open Tools Examples for Delphi</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">1.0.0.2</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">1.0.0.12</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName">OTATemplate</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalCopyright">Season&apos;s Fall Music Limited (c) 1989</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalTrademarks">Season&apos;s Fall Music Limited (c) 1989</VersionInfoKeys>
@@ -130,6 +136,7 @@
 						<Excluded_Packages Name="$(BDS)\bin\bcbofficexp140.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
 						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k140.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
 						<Excluded_Packages Name="$(BDS)\bin\dclofficexp140.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="C:\Documents and Settings\All Users\Documents\RAD Studio\7.0\Bpl\DelphiIDEExplorer2010.bpl">Delphi IDE Explorer 1.0a</Excluded_Packages>
 					</Excluded_Packages>
 				</Delphi.Personality>
 			</BorlandProject>
@@ -139,46 +146,46 @@
 
 <!-- EurekaLog First Line
 [Exception Log]
-EurekaLog Version=6102
+EurekaLog Version=6101
 Activate=1
 Activate Handle=1
 Save Log File=1
 Foreground Tab=0
-Freeze Activate=0
-Freeze Timeout=0
-SMTP From=eurekalog@email.com
+Freeze Activate=1
+Freeze Timeout=60
+SMTP From=username@domain.com
 SMTP Host=
 SMTP Port=25
 SMTP UserID=
 SMTP Password=
 Append to Log=0
 TerminateBtn Operation=2
-Errors Number=32
+Errors Number=64
 Errors Terminate=3
-Email Address=
-Email Object=
-Email Send Options=0
+Email Address=davidghoyle@gmail.com
+Email Object=%%_ExceptModuleName%% (%%_ExceptModuleVer%%) raised an exception "%%_ExceptMsg%%"
+Email Send Options=1
 Output Path=
 Encrypt Password=
 AutoCloseDialogSecs=0
 WebSendMode=0
 SupportULR=
 HTMLLayout Count=15
-HTMLLine0="%U003Chtml%U003E"
-HTMLLine1="  %U003Chead%U003E"
-HTMLLine2="  %U003C/head%U003E"
-HTMLLine3="  %U003Cbody TopMargin=10 LeftMargin=10%U003E"
-HTMLLine4="    %U003Ctable width="100%%" border="0"%U003E"
-HTMLLine5="      %U003Ctr%U003E"
-HTMLLine6="        %U003Ctd nowrap%U003E"
-HTMLLine7="          %U003Cfont face="Lucida Console, Courier" size="2"%U003E"
-HTMLLine8="            %U003C%%HTML_TAG%%%U003E"
-HTMLLine9="          %U003C/font%U003E"
-HTMLLine10="        %U003C/td%U003E"
-HTMLLine11="      %U003C/tr%U003E"
-HTMLLine12="    %U003C/table%U003E"
-HTMLLine13="  %U003C/body%U003E"
-HTMLLine14="%U003C/html%U003E"
+HTMLLine0="%%3Chtml%%3E"
+HTMLLine1="  %%3Chead%%3E"
+HTMLLine2="  %%3C/head%%3E"
+HTMLLine3="  %%3Cbody TopMargin=10 LeftMargin=10%%3E"
+HTMLLine4="    %%3Ctable width="100%%%%" border="0"%%3E"
+HTMLLine5="      %%3Ctr%%3E"
+HTMLLine6="        %%3Ctd nowrap%%3E"
+HTMLLine7="          %%3Cfont face="Lucida Console, Courier" size="2"%%3E"
+HTMLLine8="            %%3C%%%%HTML_TAG%%%%%%3E"
+HTMLLine9="          %%3C/font%%3E"
+HTMLLine10="        %%3C/td%%3E"
+HTMLLine11="      %%3C/tr%%3E"
+HTMLLine12="    %%3C/table%%3E"
+HTMLLine13="  %%3C/body%%3E"
+HTMLLine14="%%3C/html%%3E"
 AutoCrashOperation=2
 AutoCrashNumber=10
 AutoCrashMinutes=1
@@ -203,11 +210,17 @@ PostSuccessfulBuildEvent=
 PostFailureBuildEvent=
 ExceptionDialogType=2
 Count=0
-EMail Message Line Count=0
-loNoDuplicateErrors=0
-loAppendReproduceText=0
+EMail Message Line Count=6
+Line0="Dear User,"
+Line1=""
+Line2="Please send this message to Dave so that he can fix this problem with the software."
+Line3=""
+Line4="regards"
+Line5="Dave."
+loNoDuplicateErrors=1
+loAppendReproduceText=1
 loDeleteLogAtVersionChange=0
-loAddComputerNameInLogFileName=0
+loAddComputerNameInLogFileName=1
 loSaveModulesAndProcessesSections=1
 loSaveAssemblerAndCPUSections=1
 soAppStartDate=1
@@ -259,15 +272,15 @@ soNetDNS2=1
 soNetDHCP=1
 soCustomData=1
 sndShowSendDialog=1
-sndShowSuccessFailureMsg=0
-sndSendEntireLog=0
+sndShowSuccessFailureMsg=1
+sndSendEntireLog=1
 sndSendXMLLogCopy=0
 sndSendScreenshot=1
-sndUseOnlyActiveWindow=0
+sndUseOnlyActiveWindow=1
 sndSendLastHTMLPage=1
-sndSendInSeparatedThread=0
-sndAddDateInFileName=0
-sndAddComputerNameInFileName=0
+sndSendInSeparatedThread=1
+sndAddDateInFileName=1
+sndAddComputerNameInFileName=1
 edoSendErrorReportChecked=1
 edoAttachScreenshotChecked=1
 edoShowCopyToClipOption=1
@@ -288,17 +301,17 @@ boDoNotPauseMainThread=0
 boPauseWindowsThreads=0
 boUseMainModuleOptions=1
 boCopyLogInCaseOfError=1
-boSaveCompressedCopyInCaseOfError=0
+boSaveCompressedCopyInCaseOfError=1
 boHandleSafeCallExceptions=1
 boCallRTLExceptionEvent=0
 boCatchHandledExceptions=0
-loCatchLeaks=0
+loCatchLeaks=1
 loGroupsSonLeaks=1
 loHideBorlandLeaks=1
 loFreeAllLeaks=1
 loCatchLeaksExceptions=1
 cfoReduceFileSize=1
-cfoCheckFileCorruption=0
+cfoCheckFileCorruption=1
 cfoUseEL7=0
 Count mtInformationMsgCaption=1
 mtInformationMsgCaption0="Information."
@@ -619,5 +632,5 @@ Count mtException_AntiFreeze=1
 mtException_AntiFreeze0="The application seems to be frozen."
 Count mtInvalidEmailMsg=1
 mtInvalidEmailMsg0="Invalid email."
-TextsCollection=English
+TextsCollection=
 EurekaLog Last Line -->
