@@ -40,6 +40,7 @@ contains
   EditorNotifierInterface in '..\Source\EditorNotifierInterface.pas',
   OptionsForm in '..\Source\OptionsForm.pas' {frmOptions},
   ItemSelectionForm in '..\Source\ItemSelectionForm.pas' {frmItemSelectionForm},
-  SelectMethodUnit in '..\Source\SelectMethodUnit.pas';
+  SelectMethodUnit in '..\Source\SelectMethodUnit.pas',
+  RepositoryWizardInterface in '..\Source\RepositoryWizardInterface.pas';
 
 End.
