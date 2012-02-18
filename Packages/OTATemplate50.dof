@@ -39,8 +39,8 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=..\
-UnitOutputDir=..\0005DCUs\
+OutputDir=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template
+UnitOutputDir=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template\0005DCUs
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=
@@ -49,11 +49,11 @@ Conditionals=
 DebugSourceDirs=
 UsePackages=1
 [Parameters]
-RunParams=
-HostApplication=
+RunParams=-rOTATemplateDPR
+HostApplication=C:\Program Files (x86)\Borland\Delphi5\Bin\delphi32.exe
 [Language]
 ActiveLang=
-ProjectLang=
+ProjectLang=$00000809
 RootDir=
 [Version Info]
 IncludeVerInfo=0
@@ -80,14 +80,23 @@ OriginalFilename=
 ProductName=
 ProductVersion=1.0.0.0
 Comments=
-[Excluded Packages]
-P:\Program Files\ComponentAce\ZipForge\Lib\Delphi 5\dclZipForged5.bpl=ZipForge Package
+[HistoryLists\hlConditionals]
+Count=1
+Item0=EUREKALOG;EUREKALOG_VER6;DEBUG
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlUnitOutputDirectory]
-Count=1
-Item0=..\0005DCUs\
+Count=3
+Item0=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template\0005DCUs
+Item1=..\0005DCUs\
+Item2=$(DELPHI)\0005DCUs\
 [HistoryLists\hlOutputDirectorry]
-Count=1
-Item0=..\
+Count=3
+Item0=D:\HoylD\Borland Studio Projects\IDE Addins\OTA Template
+Item1=..\
+Item2=$(DELPHI)\
+[HistoryLists\hlBPLOutput]
+Count=2
+Item0=$(DELPHI)\
+Item1=..\
