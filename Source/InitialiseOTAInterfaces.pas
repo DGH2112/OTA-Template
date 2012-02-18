@@ -10,6 +10,7 @@ Uses
 {$R '..\SplashScreenIcon.res' '..\SplashScreenIcon.RC'}
 {$R '..\RepositoryWizardResources.res' '..\RepositoryWizardResources.RC'}
 {$R '..\ProjectTemplateResources.RES' '..\ProjectTemplateResources.RC'}
+{$R '..\ModuleTemplateResources.RES' '..\ModuleTemplateResources.RC'}
 
   Procedure Register;
 
