@@ -9,16 +9,15 @@ Uses
 {$INCLUDE CompilerDefinitions.inc}
 
 Type
-  TProjectCreator = Class(TInterfacedObject, IOTACreator,IOTAProjectCreator
+  TProjectCreator = Class(TInterfacedObject, IOTACreator, IOTAProjectCreator
     {$IFDEF D0005}, IOTAProjectCreator50 {$ENDIF}
     {$IFDEF D0008}, IOTAProjectCreator80 {$ENDIF}
   )
   {$IFDEF D2005} Strict {$ENDIF} Private
-    FProjectName : String;
-    FProjectType : TProjectType;
+    FProjectWizardInfo : TProjectWizardInfo;
   {$IFDEF D2005} Strict {$ENDIF} Protected
   Public
-    Constructor Create(strProjectName : String; enumProjectType : TProjectType);
+    Constructor Create(ProjectWizardInfo : TProjectWizardInfo);
     // IOTACreator
     Function  GetCreatorType: String;
     Function  GetExisting: Boolean;
@@ -45,10 +44,9 @@ Type
 
   TProjectCreatorFile = Class(TInterfacedObject, IOTAFile)
   {$IFDEF D2005} Strict {$ENDIF} Private
-    FProjectName : String;
-    FProjectType : TProjectType;
+    FProjectWizardInfo : TProjectWizardInfo;
   Public
-    Constructor Create(strProjectName : String; enumProjectType : TProjectType);
+    Constructor Create(ProjectWizardInfo: TProjectWizardInfo);
     function GetAge: TDateTime;
     function GetSource: string;
   End;
@@ -59,15 +57,14 @@ Uses
   SysUtils,
   Classes,
   Windows,
-  UtilityFunctions;
+  UtilityFunctions, ModuleCreatorInterface;
 
 { TProjectCreator }
 
-constructor TProjectCreator.Create(strProjectName: String; enumProjectType : TProjectType);
+constructor TProjectCreator.Create(ProjectWizardInfo : TProjectWizardInfo);
 
 begin
-  FProjectName := strProjectName;
-  FProjectType := enumProjectType;
+  FProjectWizardInfo := ProjectWizardInfo;
 end;
 
 function TProjectCreator.GetCreatorType: String;
@@ -82,13 +79,13 @@ end;
 
 function TProjectCreator.GetFileName: String;
 begin
-  Case FProjectType Of
-    ptPackage: Result := GetCurrentDir + '\' + FProjectName + '.dpk';
-    ptDLL:     Result := GetCurrentDir + '\' + FProjectName + '.dpr';
+  Case FProjectWizardInfo.FProjectType Of
+    //ptApplication: Result := GetCurrentDir + '\' + FProjectWizardInfo.FProjectName + '.dpr';
+    ptPackage:     Result := GetCurrentDir + '\' + FProjectWizardInfo.FProjectName + '.dpk';
+    ptDLL:         Result := GetCurrentDir + '\' + FProjectWizardInfo.FProjectName + '.dpr';
   Else
     Raise Exception.Create('Unhandled project type in TProjectCreator.GetFileName.');
   End;
-
 end;
 
 function TProjectCreator.GetFileSystem: String;
@@ -130,8 +127,18 @@ end;
 
 {$IFDEF D0005}
 procedure TProjectCreator.NewDefaultProjectModule(const Project: IOTAProject);
+
+Var
+  M: TModuleCreator;
+  iModule: TAdditionalModule;
+
 begin
-  //
+  For iModule := Low(TAdditionalModule) To High(TAdditionalModule) Do
+    If iModule In FProjectWizardInfo.FAdditionalModules Then
+      Begin
+        M := TModuleCreator.Create(Project, FProjectWizardInfo, iModule);
+        (BorlandIDEServices As IOTAModuleServices).CreateModule(M);
+      End;
 end;
 {$ENDIF}
 
@@ -147,15 +154,14 @@ end;
 
 function TProjectCreator.NewProjectSource(const ProjectName: String): IOTAFile;
 begin
-  Result := TProjectCreatorFile.Create(FProjectName, FProjectType);
+  Result := TProjectCreatorFile.Create(FProjectWizardInfo);
 end;
 
 { TProjectCreatorFile }
 
-constructor TProjectCreatorFile.Create(strProjectName: String; enumProjectType : TProjectType);
+constructor TProjectCreatorFile.Create(ProjectWizardInfo: TProjectWizardInfo);
 begin
-  FProjectName := strProjectName;
-  FProjectType := enumProjectType;
+  FProjectWizardInfo := ProjectWizardInfo;
 end;
 
 function TProjectCreatorFile.GetAge: TDateTime;
@@ -167,7 +173,10 @@ function TProjectCreatorFile.GetSource: string;
 
 Const
   strProjectTemplate : Array[Low(TProjectType)..High(TProjectType)] Of String = (
-    'OTAProjectPackageSource', 'OTAProjectDLLSource');
+    //'OTAProjectProgramSource',
+    'OTAProjectPackageSource',
+    'OTAProjectDLLSource'
+  );
 
 ResourceString
   strResourceMsg = 'The OTA Project Template ''%s'' was not found.';
@@ -179,10 +188,11 @@ Var
   {$ENDIF}
 
 begin
-  Res := TResourceStream.Create(HInstance, strProjectTemplate[FProjectType], RT_RCDATA);
+  Res := TResourceStream.Create(HInstance,
+    strProjectTemplate[FProjectWizardInfo.FProjectType], RT_RCDATA);
   Try
     If Res.Size = 0 Then
-      Raise Exception.CreateFmt(strResourceMsg, [strProjectTemplate[FProjectType]]);
+      Raise Exception.CreateFmt(strResourceMsg, [strProjectTemplate[FProjectWizardInfo.FProjectType]]);
     {$IFNDEF D2009}
     SetLength(Result, Res.Size);
     Res.ReadBuffer(Result[1], Res.Size);
@@ -194,7 +204,7 @@ begin
   Finally
     Res.Free;
   End;
-  Result := Format(Result, [FProjectName]);
+  Result := Format(Result, [FProjectWizardInfo.FProjectName]);
 end;
 
 End.
