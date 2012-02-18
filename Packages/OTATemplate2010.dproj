@@ -140,7 +140,7 @@
 
 <!-- EurekaLog First Line
 [Exception Log]
-EurekaLog Version=6102
+EurekaLog Version=6101
 Activate=1
 Activate Handle=1
 Save Log File=1
