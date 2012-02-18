@@ -42,8 +42,9 @@
 			<DCC_DebugInformation>false</DCC_DebugInformation>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_MapFile>3</DCC_MapFile>
 			<DCC_Optimize>false</DCC_Optimize>
-			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Define>DEBUG;EUREKALOG;EUREKALOG_VER6;$(DCC_Define)</DCC_Define>
 			<DCC_DcuOutput>2010DCUs\</DCC_DcuOutput>
 			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
 		</PropertyGroup>
@@ -65,6 +66,7 @@
 			<DCCReference Include="..\Source\ItemSelectionForm.pas">
 				<Form>frmItemSelectionForm</Form>
 			</DCCReference>
+			<DCCReference Include="..\Source\RepositoryWizardInterface.pas"/>
 			<None Include="..\Source\CompilerDefinitions.inc"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
@@ -91,14 +93,16 @@
 						<Parameters Name="UseLauncher">False</Parameters>
 						<Parameters Name="LoadAllSymbols">True</Parameters>
 						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+						<Parameters Name="RunParams">-pDelphi -rTemplateDLL</Parameters>
+						<Parameters Name="HostApplication">C:\Program Files (x86)\Embarcadero\RAD Studio\7.0\bin\bds.exe</Parameters>
 					</Parameters>
 					<VersionInfo>
-						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
 						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
 						<VersionInfo Name="MajorVer">1</VersionInfo>
 						<VersionInfo Name="MinorVer">0</VersionInfo>
 						<VersionInfo Name="Release">0</VersionInfo>
-						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Build">6</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
@@ -108,16 +112,16 @@
 						<VersionInfo Name="CodePage">1252</VersionInfo>
 					</VersionInfo>
 					<VersionInfoKeys>
-						<VersionInfoKeys Name="CompanyName"/>
-						<VersionInfoKeys Name="FileDescription"/>
-						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
-						<VersionInfoKeys Name="InternalName"/>
-						<VersionInfoKeys Name="LegalCopyright"/>
-						<VersionInfoKeys Name="LegalTrademarks"/>
-						<VersionInfoKeys Name="OriginalFilename"/>
-						<VersionInfoKeys Name="ProductName"/>
-						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
-						<VersionInfoKeys Name="Comments"/>
+						<VersionInfoKeys Name="CompanyName">Season&apos;s Fall Music Limited (c) 1989</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription">A set of examples for the Open Tools API in Delphi</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">1.0.0.6</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName">OTATemplate</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalCopyright">Season&apos;s Fall Music Limited (c) 1989</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalTrademarks">Season&apos;s Fall Music Limited (c) 1989</VersionInfoKeys>
+						<VersionInfoKeys Name="OriginalFilename">OTATemplate</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductName">OTA Template</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">1.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments">A set of examples for the Open Tools API in Delphi</VersionInfoKeys>
 					</VersionInfoKeys>
 					<Excluded_Packages>
 						<Excluded_Packages Name="$(BDS)\bin\bcboffice2k140.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
