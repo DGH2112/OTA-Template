@@ -28,7 +28,8 @@ uses
   ItemSelectionForm in '..\Source\ItemSelectionForm.pas' {frmItemSelectionForm},
   RepositoryWizardInterface in '..\Source\RepositoryWizardInterface.pas',
   RepositoryWizardForm in '..\Source\RepositoryWizardForm.pas' {frmRepositoryWizard},
-  ProjectCreatorInterface in '..\Source\ProjectCreatorInterface.pas';
+  ProjectCreatorInterface in '..\Source\ProjectCreatorInterface.pas',
+  ModuleCreatorInterface in '..\Source\ModuleCreatorInterface.pas';
 
 {$R *.res}
 
