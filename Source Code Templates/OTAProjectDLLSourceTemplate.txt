@@ -12,5 +12,6 @@ library %s;
 
 {$R *.res}
 
+{Generate by DGH OTA Wizard}
 begin
 end.
