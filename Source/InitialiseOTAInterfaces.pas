@@ -8,6 +8,7 @@ Uses
 {$INCLUDE 'CompilerDefinitions.inc'}
 
 {$R '..\SplashScreenIcon.res' '..\SplashScreenIcon.RC'}
+{$R '..\RepositoryWizardResources.res' '..\RepositoryWizardResources.RC'}
 
   Procedure Register;
 
@@ -29,25 +30,30 @@ Uses
   IDENotifierInterface,
   CompilerNotifierInterface,
   EditorNotifierInterface,
+  RepositoryWizardInterface,
   UtilityFunctions;
+
+Type
+  TWizardType = (wtPackageWizard, wtDLLWizard);
 
 Var
   {$IFDEF D2005}
-  VersionInfo       : TVersionInfo;
-  bmSplashScreen    : HBITMAP;
+  VersionInfo            : TVersionInfo;
+  bmSplashScreen         : HBITMAP;
   {$ENDIF}
-  iWizardIndex      : Integer = 0;
+  iWizardIndex           : Integer = 0;
   {$IFDEF D0006}
-  iAboutPluginIndex : Integer = 0;
+  iAboutPluginIndex      : Integer = 0;
   {$ENDIF}
-  iKeyBindingIndex  : Integer = 0;
-  iIDENotfierIndex  : Integer = 0;
+  iKeyBindingIndex       : Integer = 0;
+  iIDENotfierIndex       : Integer = 0;
   {$IFDEF D2010}
-  iCompilerIndex    : Integer = 0;
+  iCompilerIndex         : Integer = 0;
   {$ENDIF}
   {$IFDEF D0006}
-  iEditorIndex      : Integer = 0;
+  iEditorIndex           : Integer = 0;
   {$ENDIF}
+  iRepositoryWizardIndex : Integer = 0;
 
 {$IFDEF D2005}
 Const
@@ -58,7 +64,7 @@ ResourceString
   strSplashScreenBuild = 'Freeware by $AUTHOR$ (Build %d.%d.%d.%d)';
 {$ENDIF}
 
-Function InitialiseWizard : TWizardTemplate;
+Function InitialiseWizard(WizardType : TWizardType) : TWizardTemplate;
 
 Var
   Svcs : IOTAServices;
@@ -81,7 +87,8 @@ Begin
   {$ENDIF}
   // Create Wizard / Menu Wizard
   Result := TWizardTemplate.Create;
-  iWizardIndex := (BorlandIDEServices As IOTAWizardServices).AddWizard(Result);
+  If WizardType = wtPackageWizard Then // Only register main wizard this way if PACKAGE
+    iWizardIndex := (BorlandIDEServices As IOTAWizardServices).AddWizard(Result);
   // Create Keyboard Binding Interface
   iKeyBindingIndex := (BorlandIDEServices As IOTAKeyboardServices).AddKeyboardBinding(
     TKeybindingTemplate.Create);
@@ -98,12 +105,15 @@ Begin
   iEditorIndex := (BorlandIDEServices As IOTAEditorServices).AddNotifier(
     TEditorNotifier.Create);
   {$ENDIF}
+  // Create Project Repository Interface
+  iRepositoryWizardIndex := (BorlandIDEServices As IOTAWizardServices).AddWizard(
+    TRepositoryWizardInterface.Create);
 End;
 
 procedure Register;
 
 begin
-  InitialiseWizard;
+  InitialiseWizard(wtPackageWizard);
 end;
 
 Function InitWizard(Const BorlandIDEServices : IBorlandIDEServices;
@@ -113,7 +123,7 @@ Function InitWizard(Const BorlandIDEServices : IBorlandIDEServices;
 Begin
   Result := BorlandIDEServices <> Nil;
   If Result Then
-    RegisterProc(InitialiseWizard);
+    RegisterProc(InitialiseWizard(wtDLLWizard));
 End;
 
 Initialization
@@ -145,10 +155,15 @@ Finalization
     (BorlandIDEServices As IOTAServices).RemoveNotifier(iIDENotfierIndex);
   {$IFDEF D2010}
   // Remove Compiler Notifier Interface
-  (BorlandIDEServices As IOTACompileServices).RemoveNotifier(iCompilerIndex);
+  If iCompilerIndex <> 0 Then
+    (BorlandIDEServices As IOTACompileServices).RemoveNotifier(iCompilerIndex);
   {$ENDIF}
   {$IFDEF D2005}
   // Remove Editor Notifier Interface
-  (BorlandIDEServices As IOTAEditorServices).RemoveNotifier(iEditorIndex);
+  If iEditorIndex <> 0 Then
+    (BorlandIDEServices As IOTAEditorServices).RemoveNotifier(iEditorIndex);
   {$ENDIF}
+  // Remove Repository Wizard Interface
+  If iRepositoryWizardIndex <> 0 Then
+    (BorlandIDEServices As IOTAWizardServices).RemoveWizard(iRepositoryWizardIndex);
 End.
