@@ -1,3 +1,13 @@
+(**
+
+  This module contains a simple set of methods to allow the user to select a method from a
+  list so that they can navigate to it.
+
+  @Version 1.0
+  @Date    08 Mar 2012
+  @Author  David Hoyle
+
+**)
 Unit SelectMethodUnit;
 
 Interface
@@ -14,8 +24,11 @@ Uses
   UtilityFunctions;
 
 Type
+  (** An enumerate to define the variant portion of the item position record. **)
   TSubItem = (siData, siPosition);
 
+  (** A variant record to help translate line and column information from a data object
+      referencec against each string list item. **)
   TItemPosition = Record
     Case TSubItem Of
       siData: (Data : TObject);
@@ -25,6 +38,17 @@ Type
       );
   End;
 
+(**
+
+  This is a find method to find the presense of a method in the given line.
+
+  @precon  None.
+  @postcon Returns true if the given line contains a method declaration.
+
+  @param   strLine as a String
+  @return  a Boolean
+
+**)
 Function IsMethod(strLine : String) : Boolean;
 
 Const
@@ -44,6 +68,20 @@ Begin
       End;
 End;
 
+(**
+
+  This method searches the text of the active editor and finds all the methods and places
+  them in the given string list with the data object reference containing the line and
+  column reference.
+
+  @precon  None.
+  @postcon searches the text of the active editor and finds all the methods and places
+           them in the given string list with the data object reference containing the
+           line and column reference.
+
+  @param   slItems as a TStringList
+
+**)
 Procedure GetMethods(slItems : TStringList);
 
 Var
@@ -85,6 +123,21 @@ Begin
     End;
 End;
 
+(**
+
+  This method inserts a comment into the active editors text at the indexed string list`s
+  method`s position and returns the new cursor position.
+
+  @precon  slItems must be a valid string list and iIndex must be a valid index into that
+           string list..
+  @postcon inserts a comment into the active editors text at the indexed string list`s
+           method`s position and returns the new cursor position.
+
+  @param   slItems as a TStringList
+  @param   iIndex  as an Integer
+  @return  a TOTAEditPos
+
+**)
 Function InsertComment(slItems : TStringList; iIndex : Integer) : TOTAEditPos;
 
 Var
@@ -131,6 +184,16 @@ Begin
     End;
 End;
 
+(**
+
+  This method displays a dialogue to the user from which they select a method. Once
+  selected a comment is inserted about the selected method.
+
+  @precon  None.
+  @postcon Displays a dialogue to the user from which they select a method. Once
+           selected a comment is inserted about the selected method.
+
+**)
 Procedure SelectMethod;
 
 Var
