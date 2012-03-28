@@ -20,6 +20,10 @@ object frmOptions: TfrmOptions
     Top = 15
     Width = 108
     Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = 'Auto Save &Interval'
     FocusControl = edtAutosaveInterval
   end
@@ -28,6 +32,10 @@ object frmOptions: TfrmOptions
     Top = 10
     Width = 50
     Height = 24
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     TabOrder = 0
     Text = '60'
   end
@@ -36,18 +44,25 @@ object frmOptions: TfrmOptions
     Top = 10
     Width = 19
     Height = 24
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Associate = edtAutosaveInterval
     Min = 60
     Max = 3600
     Position = 60
     TabOrder = 1
-    Wrap = False
   end
   object cbxPrompt: TCheckBox
     Left = 10
     Top = 44
     Width = 119
     Height = 21
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = '&Prompt'
     TabOrder = 2
   end
@@ -56,15 +71,27 @@ object frmOptions: TfrmOptions
     Top = 10
     Width = 92
     Height = 31
-    TabOrder = 3
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    DoubleBuffered = True
     Kind = bkOK
+    ParentDoubleBuffered = False
+    TabOrder = 3
   end
   object btnCancel: TBitBtn
     Left = 202
     Top = 44
     Width = 92
     Height = 31
-    TabOrder = 4
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    DoubleBuffered = True
     Kind = bkCancel
+    ParentDoubleBuffered = False
+    TabOrder = 4
   end
 end
