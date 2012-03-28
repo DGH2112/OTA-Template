@@ -1,3 +1,13 @@
+(**
+
+  This module contains a form for asking the user which portions of the Open Tools API
+  require generating modules for.
+
+  @Version 1.0
+  @Author  David Hoyle
+  @Date    08 Mar 2012
+
+**)
 unit RepositoryWizardForm;
 
 interface
@@ -9,11 +19,14 @@ uses
 {$INCLUDE CompilerDefinitions.inc}
 
 type
+  (** An enumerate type of define the type of project to be created. **)
   TProjectType = (
     //ptApplication,
     ptPackage,
     ptDLL
   );
+
+  (** An enumerate type to define the different types of module that can be generated. **)
   TAdditionalModule = (
     amCompilerDefintions,
     amInitialiseOTAInterface,
@@ -27,8 +40,11 @@ type
     amProjectCreatorInterface,
     amModuleCreatorInterface
   );
+  (** A set of the above enumerates to make passing of information easier. **)
   TAdditionalModules = Set Of TAdditionalModule;
 
+  (** A record to describe the information that needs to be captured for the generation of
+      an Open Tools API project. **)
   TProjectWizardInfo = Record
     FProjectName       : String;
     FProjectType       : TProjectType;
@@ -41,6 +57,7 @@ type
     FWizardDescription : String;
   End;
 
+  (** A class which represents the interface for for capturing the information. **)
   TfrmRepositoryWizard = class(TForm)
     Image1: TImage;
     lblProjectName: TLabel;
@@ -79,8 +96,31 @@ Uses
 
 {$R *.dfm}
 
+(**
+
+  This is an on click event handler for the OK button.
+
+  @precon  None.
+  @postcon Checks that the form is filled in correctly and confirms the dialogue.
+
+  @param   Sender as a TObject
+
+**)
 procedure TfrmRepositoryWizard.btnOKClick(Sender: TObject);
 
+  (**
+
+    This checks to strText for being null. If null it displays a message and aborts to
+    stop further processing.
+
+    @precon  None.
+    @postcon Checks to strText for being null. If null it displays a message and aborts to
+             stop further processing.
+
+    @param   strText as a String
+    @param   strMsg  as a String
+
+  **)
   Procedure CheckTextField(strText, strMsg : String);
 
   Begin
@@ -134,6 +174,17 @@ begin
   CheckTextField(edtWizardMenuText.Text, 'You must specify a Wizard Menu Text.');
 end;
 
+(**
+
+  This method is an on key press event handler for the Project Name edit control.
+
+  @precon  None.
+  @postcon Ensure that only Alphanumeric letters are typed in the control.
+
+  @param   Sender as a TObject
+  @param   Key    as a Char as a reference
+
+**)
 procedure TfrmRepositoryWizard.edtProjectNameKeyPress(Sender: TObject; var Key: Char);
 begin
   {$IFNDEF D2009}
@@ -144,6 +195,18 @@ begin
     Key := #0;
 end;
 
+(**
+
+  This is the forms main interface method.
+
+  @precon  None.
+  @postcon Sets up the form and if confirmed stores all the form information in the passed
+           record.
+
+  @param   ProjectWizardInfo as a TProjectWizardInfo as a reference
+  @return  a Boolean
+
+**)
 Class Function TfrmRepositoryWizard.Execute(var ProjectWizardInfo : TProjectWizardInfo): Boolean;
 
 Const
@@ -214,6 +277,17 @@ Begin
     End;
 End;
 
+(**
+
+  Is an on click event handler for the Additional modules list box. an ensures that the
+  common modules are always checked.
+
+  @precon  None.
+  @postcon Ensures that the common modules are always checked.
+
+  @param   Sender as a TObject
+
+**)
 procedure TfrmRepositoryWizard.lbxAdditionalModulesClickCheck(Sender: TObject);
 
 Var
