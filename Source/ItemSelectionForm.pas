@@ -1,3 +1,13 @@
+(**
+
+  This module contained a form for selecting from a list of items provided by a string
+  list.
+
+  @Author  David Hoyle
+  @Version 1.0
+  @Date    08 Mar 2012
+
+**)
 Unit ItemSelectionForm;
 
 Interface
@@ -15,6 +25,7 @@ Uses
   Buttons;
 
 Type
+  (** A class to represent the form interface. **)
   TfrmItemSelectionForm = Class(TForm)
     lbxItems: TListBox;
     btnOK: TBitBtn;
@@ -33,6 +44,16 @@ Implementation
 
 { TItemSelectionForm }
 
+(**
+
+  This is an on click event handler for the OK button.
+
+  @precon  None.
+  @postcon Checks that an item is selected and confirms the dialogue.
+
+  @param   Sender as a TObject
+
+**)
 Procedure TfrmItemSelectionForm.btnOKClick(Sender: TObject);
 
 Begin
@@ -43,6 +64,18 @@ Begin
     End;
 End;
 
+(**
+
+  This is the forms main interface method for invoking the dialogue..
+
+  @precon  slItems must be a valid string list.
+  @postcon Displays the dialogue with the items from the string list.
+
+  @param   slItems  as a TStringList
+  @param   strTitle as a String
+  @return  an Integer
+
+**)
 Class Function TfrmItemSelectionForm.Execute(slItems: TStringList; strTitle: String): Integer;
 
 Var
