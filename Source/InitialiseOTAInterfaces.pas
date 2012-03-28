@@ -1,3 +1,14 @@
+(**
+
+  This module contains the code that intialises the various wizards and other
+  interface element of this Open Tools API project. It is designed to work for
+  both packages and DLL experts.
+
+  @Author  David Hoyle
+  @Version 1.0
+  @Date    06 Mar 2012
+
+**)
 Unit InitialiseOTAInterfaces;
 
 Interface
@@ -11,6 +22,7 @@ Uses
 {$R '..\RepositoryWizardResources.res' '..\RepositoryWizardResources.RC'}
 {$R '..\ProjectTemplateResources.RES' '..\ProjectTemplateResources.RC'}
 {$R '..\ModuleTemplateResources.RES' '..\ModuleTemplateResources.RC'}
+{$R '..\MenuImagesResources.RES' '..\MenuImagesResources.RC'}
 
   Procedure Register;
 
@@ -36,39 +48,66 @@ Uses
   UtilityFunctions;
 
 Type
+  (** A type to distinguish between packages and DLL experts. **)
   TWizardType = (wtPackageWizard, wtDLLWizard);
 
 Const
+  (** A constant to define the failed state of a wizard / notifier interface. **)
   iWizardFailState = -1;
 
 Var
   {$IFDEF D2005}
+  (** A variable to hold the module`s version information. **)
   VersionInfo            : TVersionInfo;
+  (** A varaible to hold a reference to the splash screen bitmap. **)
   bmSplashScreen         : HBITMAP;
   {$ENDIF}
+  (** A varaible for referencing the main wizard interface. **)
   iWizardIndex           : Integer = iWizardFailState;
   {$IFDEF D0006}
+  (** A varaible for referencing the About Plugin interface. **)
   iAboutPluginIndex      : Integer = iWizardFailState;
   {$ENDIF}
+  (** A varaiable for referencing the Keybindings Interface. **)
   iKeyBindingIndex       : Integer = iWizardFailState;
+  (** A varaiable for referencing the IDE Notifier interface. **)
   iIDENotfierIndex       : Integer = iWizardFailState;
   {$IFDEF D2010}
+  (** A variable for referencing the Compiler Notifier interface. **)
   iCompilerIndex         : Integer = iWizardFailState;
   {$ENDIF}
   {$IFDEF D0006}
+  (** A variable for referencing the Editor notifier interface. **)
   iEditorIndex           : Integer = iWizardFailState;
   {$ENDIF}
+  (** A variable for referencing the Repository wizard interface. **)
   iRepositoryWizardIndex : Integer = iWizardFailState;
 
 {$IFDEF D2005}
 Const
+  (** A constant string to represent bug fix letters. **)
   strRevision : String = ' abcdefghijklmnopqrstuvwxyz';
 
 ResourceString
+  (** A resource string for the splash screen name. **)
   strSplashScreenName = '$EXPERTTITLE$ %d.%d%s for Embarcadero RAD Studio';
+  (** A resource string for the splash screen build number. **)
   strSplashScreenBuild = 'Freeware by $AUTHOR$ (Build %d.%d.%d.%d)';
 {$ENDIF}
 
+(**
+
+  This function initialises the wizard / notifier interfaces for both packages
+  and DLLs and returns the created instance of the main wizard / expert
+  interface.
+
+  @precon  None.
+  @postcon Returns the main wizard template instance.
+
+  @param   WizardType as a TWizardType
+  @return  a TWizardTemplate
+
+**)
 Function InitialiseWizard(WizardType : TWizardType) : TWizardTemplate;
 
 Var
@@ -115,12 +154,35 @@ Begin
     TRepositoryWizardInterface.Create);
 End;
 
+(**
+
+  This method is called by the IDE for packages in order to initialise the
+  wizard / expert.
+
+  @precon  None.
+  @postcon Initialises the wizard / expert.
+
+**)
 procedure Register;
 
 begin
   InitialiseWizard(wtPackageWizard);
 end;
 
+(**
+
+  This method is called by the IDE for DLLs in order to initialise the wizard /
+  expert.
+
+  @precon  None.
+  @postcon Initialises the wizard / expert.
+
+  @param   BorlandIDEServices as an IBorlandIDEServices as a constant
+  @param   RegisterProc       as a TWizardRegisterProc
+  @param   Terminate          as a TWizardTerminateProc as a reference
+  @return  a Boolean
+
+**)
 Function InitWizard(Const BorlandIDEServices : IBorlandIDEServices;
   RegisterProc : TWizardRegisterProc;
   var Terminate: TWizardTerminateProc) : Boolean; StdCall;
@@ -131,6 +193,8 @@ Begin
     RegisterProc(InitialiseWizard(wtDLLWizard));
 End;
 
+(** Get the modules building information from its resource and display an item
+    in the D2005+ splash screen. **)
 Initialization
   {$IFDEF D2005}
   BuildNumber(VersionInfo);
@@ -143,6 +207,7 @@ Initialization
       False,
       Format(strSplashScreenBuild, [iMajor, iMinor, iBugfix, iBuild]));
   {$ENDIF}
+(** Remove all wizards the have been created. **)
 Finalization
   // Remove Wizard Interface
   If iWizardIndex > iWizardFailState Then
