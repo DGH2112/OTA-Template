@@ -63,6 +63,20 @@
 			<DCCReference Include="..\Source\UtilityFunctions.pas"/>
 			<DCCReference Include="..\Source\CompilerNotifierInterface.pas"/>
 			<DCCReference Include="..\Source\EditorNotifierInterface.pas"/>
+			<DCCReference Include="..\Source\OptionsForm.pas">
+				<Form>frmOptions</Form>
+			</DCCReference>
+			<DCCReference Include="..\Source\SelectMethodUnit.pas"/>
+			<DCCReference Include="..\Source\ItemSelectionForm.pas">
+				<Form>frmItemSelectionForm</Form>
+			</DCCReference>
+			<DCCReference Include="..\Source\RepositoryWizardInterface.pas"/>
+			<DCCReference Include="..\Source\RepositoryWizardForm.pas">
+				<Form>frmRepositoryWizard</Form>
+			</DCCReference>
+			<DCCReference Include="..\Source\ProjectCreatorInterface.pas"/>
+			<DCCReference Include="..\Source\ModuleCreatorInterface.pas"/>
+			<DCCReference Include="..\Source\MainMenuInterface.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
@@ -116,6 +130,12 @@
 						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcboffice2k120.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcbofficexp120.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k120.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dclofficexp120.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
 				</Delphi.Personality>
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>
