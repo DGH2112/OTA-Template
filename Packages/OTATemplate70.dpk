@@ -1,3 +1,13 @@
+(**
+
+  This is a package which defines an Open Tools API Template for all versions
+  of Delphi.
+
+  @Author  David Hoyle
+  @Version 1.0
+  @Date    20 Feb 2012
+  
+**)
 Package OTATemplate70;
 {$R *.res}
 {$ALIGN 8}
@@ -33,9 +43,9 @@ requires
 contains
   InitialiseOTAInterfaces in '..\Source\InitialiseOTAInterfaces.pas',
   WizardInterface in '..\Source\WizardInterface.pas',
-  KeyboardBindingInterface in '..\Source\KeyboardBindingInterface.pas',
   IDENotifierInterface in '..\Source\IDENotifierInterface.pas',
   UtilityFunctions in '..\Source\UtilityFunctions.pas',
+  KeyboardBindingInterface in '..\Source\KeyboardBindingInterface.pas',
   CompilerNotifierInterface in '..\Source\CompilerNotifierInterface.pas',
   EditorNotifierInterface in '..\Source\EditorNotifierInterface.pas',
   OptionsForm in '..\Source\OptionsForm.pas' {frmOptions},
@@ -44,7 +54,9 @@ contains
   RepositoryWizardInterface in '..\Source\RepositoryWizardInterface.pas',
   RepositoryWizardForm in '..\Source\RepositoryWizardForm.pas' {frmRepositoryWizard},
   ProjectCreatorInterface in '..\Source\ProjectCreatorInterface.pas',
-  ModuleCreatorInterface in '..\Source\ModuleCreatorInterface.pas';
+  ModuleCreatorInterface in '..\Source\ModuleCreatorInterface.pas',
+  ApplicationOptions in '..\Source\ApplicationOptions.pas',
+  MainMenuInterface in '..\Source\MainMenuInterface.pas';
 
 End.
 
