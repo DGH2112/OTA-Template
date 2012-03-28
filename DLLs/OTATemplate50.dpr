@@ -28,7 +28,9 @@ uses
   RepositoryWizardInterface in '..\Source\RepositoryWizardInterface.pas',
   RepositoryWizardForm in '..\Source\RepositoryWizardForm.pas' {frmRepositoryWizard},
   ProjectCreatorInterface in '..\Source\ProjectCreatorInterface.pas',
-  ModuleCreatorInterface in '..\Source\ModuleCreatorInterface.pas';
+  ModuleCreatorInterface in '..\Source\ModuleCreatorInterface.pas',
+  MainMenuInterface in '..\Source\MainMenuInterface.pas',
+  ApplicationOptions in '..\Source\ApplicationOptions.pas';
 
 {$R *.res}
 
