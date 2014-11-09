@@ -1,14 +1,3 @@
-(**
-
-  An include unit to define compiler definitions for version of delphi. If the
-  definition exists it means that that version of the compiler or high is
-  available.
-
-  @Version 1.0
-  @Date    08 Nov 2014
-  @Author  David Hoyle
-
-**)
 {$IFDEF VER90}
   {$DEFINE D0002}
 {$ENDIF}
@@ -189,7 +178,6 @@
   {$DEFINE DXE30}
 {$ENDIF}
 
-
 {$IFDEF VER250}
   {$DEFINE D0002}
   {$DEFINE D0003}
@@ -271,7 +259,5 @@
   {$DEFINE DXE60}
   {$DEFINE DXE70}
 {$ENDIF}
-
-
 
 
