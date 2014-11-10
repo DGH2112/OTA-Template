@@ -6,7 +6,7 @@
 
   @Author  David Hoyle
   @Version 1.0
-  @Date    06 Mar 2012
+  @Date    10 Nov 2014
 
 **)
 Unit InitialiseOTAInterfaces;
@@ -90,9 +90,9 @@ Const
 
 ResourceString
   (** A resource string for the splash screen name. **)
-  strSplashScreenName = '$EXPERTTITLE$ %d.%d%s for Embarcadero RAD Studio';
+  strSplashScreenName = 'OTA Template Wizard/Expert %d.%d%s for Embarcadero RAD Studio';
   (** A resource string for the splash screen build number. **)
-  strSplashScreenBuild = 'Freeware by $AUTHOR$ (Build %d.%d.%d.%d)';
+  strSplashScreenBuild = 'Freeware by David Hoyle (Build %d.%d.%d.%d)';
 {$ENDIF}
 
 (**
