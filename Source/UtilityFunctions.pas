@@ -5,7 +5,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    25 Mar 2012
+  @Date    10 Nov 2014
 
 **)
 Unit UtilityFunctions;
@@ -220,13 +220,14 @@ Var
   Group : IOTAMessageGroup;
 
 Begin
-  With (BorlandIDEServices As IOTAMessageServices) Do
-    Begin
-      Group := GetGroup(strGroupName);
-      If Group = Nil Then
-        Group := AddMessageGroup(strGroupName);
-      AddTitleMessage(strText, Group);
-    End;
+  If Application.MainForm.Visible Then
+    With (BorlandIDEServices As IOTAMessageServices) Do
+      Begin
+        Group := GetGroup(strGroupName);
+        If Group = Nil Then
+          Group := AddMessageGroup(strGroupName);
+        AddTitleMessage(strText, Group);
+      End;
 End;
 {$ENDIF}
 
