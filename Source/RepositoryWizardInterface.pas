@@ -5,7 +5,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    23 Mar 2012
+  @Date    10 Nov 2014
 
 **)
 Unit RepositoryWizardInterface;
@@ -186,6 +186,7 @@ End;
 Procedure TRepositoryWizardInterface.Destroyed;
 
 Begin
+  ClearMessages([cmCompiler..cmTool]);
   OutputMessage('Destroyed' {$IFDEF D0006}, strRepositoryWizardGroup {$ENDIF});
 End;
 
@@ -555,5 +556,4 @@ Initialization
 (** Ensure the wizard is freed from memory. **)
 Finalization
   FProjWizardRef := Nil;
-  ClearMessages([cmCompiler..cmTool]);
 End.
