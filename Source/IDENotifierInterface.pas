@@ -4,7 +4,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    24 Mar 2012
+  @Date    10 Nov 2014
 
 **)
 Unit IDENotifierInterface;
@@ -275,6 +275,7 @@ End;
 Procedure TIDENotifierTemplate.Destroyed;
 
 Begin
+  ClearMessages([cmCompiler..cmTool]);
   If moShowIDEMessages In ApplicationOps.ModuleOps Then
     OutputMessage('Destroyed' {$IFDEF D0006}, strIDENotifierMessages {$ENDIF});
 End;
@@ -294,11 +295,5 @@ Begin
     OutputMessage('Modified' {$IFDEF D0006} , strIDENotifierMessages {$ENDIF});
 End;
 
-(** A null intialisation section **)
-Initialization
-(** Ensure that any messages are removed from the IDE before unloading the
-    package. **)
-Finalization
-  ClearMessages([cmCompiler..cmTool]);
 End.
 
