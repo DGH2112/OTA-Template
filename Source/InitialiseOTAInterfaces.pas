@@ -6,7 +6,7 @@
 
   @Author  David Hoyle
   @Version 1.0
-  @Date    10 Nov 2014
+  @Date    27 Mar 2016
 
 **)
 Unit InitialiseOTAInterfaces;
@@ -16,7 +16,7 @@ Interface
 Uses
   ToolsAPI;
 
-{$INCLUDE 'CompilerDefinitions.inc'}
+{$INCLUDE '..\..\..\Library\CompilerDefinitions.inc'}
 
 {$R '..\SplashScreenIcon.res' '..\SplashScreenIcon.RC'}
 {$R '..\RepositoryWizardResources.res' '..\RepositoryWizardResources.RC'}
@@ -90,7 +90,7 @@ Const
 
 ResourceString
   (** A resource string for the splash screen name. **)
-  strSplashScreenName = 'OTA Template Wizard/Expert %d.%d%s for Embarcadero RAD Studio';
+  strSplashScreenName = 'OTA Template Wizard/Expert %d.%d%s for %s';
   (** A resource string for the splash screen build number. **)
   strSplashScreenBuild = 'Freeware by David Hoyle (Build %d.%d.%d.%d)';
 {$ENDIF}
@@ -122,7 +122,7 @@ Begin
   bmSplashScreen := LoadBitmap(hInstance, 'SplashScreenBitMap');
   With VersionInfo Do
     iAboutPluginIndex := (BorlandIDEServices As IOTAAboutBoxServices).AddPluginInfo(
-      Format(strSplashScreenName, [iMajor, iMinor, Copy(strRevision, iBugFix + 1, 1)]),
+      Format(strSplashScreenName, [iMajor, iMinor, Copy(strRevision, iBugFix + 1, 1), Application.Title]),
       '$WIZARDDESCRIPTION$.',
       bmSplashScreen,
       False,
@@ -202,7 +202,7 @@ Initialization
   bmSplashScreen := LoadBitmap(hInstance, 'SplashScreenBitMap');
   With VersionInfo Do
     (SplashScreenServices As IOTASplashScreenServices).AddPluginBitmap(
-      Format(strSplashScreenName, [iMajor, iMinor, Copy(strRevision, iBugFix + 1, 1)]),
+      Format(strSplashScreenName, [iMajor, iMinor, Copy(strRevision, iBugFix + 1, 1), Application.Title]),
       bmSplashScreen,
       False,
       Format(strSplashScreenBuild, [iMajor, iMinor, iBugfix, iBuild]));
