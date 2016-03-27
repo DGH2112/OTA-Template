@@ -5,7 +5,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    10 Nov 2014
+  @Date    27 Mar 2016
 
 **)
 Unit RepositoryWizardInterface;
@@ -17,7 +17,7 @@ Uses
   Windows,
   RepositoryWizardForm;
 
-{$INCLUDE CompilerDefinitions.inc}
+{$INCLUDE ..\..\..\Library\CompilerDefinitions.inc}
 
 Type
   (** A class to handle the IOTARepositoryWizard interfaces. **)
