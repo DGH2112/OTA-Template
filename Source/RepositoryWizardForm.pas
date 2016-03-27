@@ -5,7 +5,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    08 Mar 2012
+  @Date    27 Mar 2016
 
 **)
 unit RepositoryWizardForm;
@@ -16,7 +16,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, CheckLst, ExtCtrls;
 
-{$INCLUDE CompilerDefinitions.inc}
+{$INCLUDE ..\..\..\Library\CompilerDefinitions.inc}
 
 type
   (** An enumerate type of define the type of project to be created. **)

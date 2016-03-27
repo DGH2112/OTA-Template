@@ -468,9 +468,8 @@ object frmRepositoryWizard: TfrmRepositoryWizard
     Width = 75
     Height = 25
     Anchors = [akTop, akRight]
-    DoubleBuffered = True
     Kind = bkOK
-    ParentDoubleBuffered = False
+    NumGlyphs = 2
     TabOrder = 9
     OnClick = btnOKClick
   end
@@ -480,9 +479,8 @@ object frmRepositoryWizard: TfrmRepositoryWizard
     Width = 75
     Height = 25
     Anchors = [akTop, akRight]
-    DoubleBuffered = True
     Kind = bkCancel
-    ParentDoubleBuffered = False
+    NumGlyphs = 2
     TabOrder = 10
   end
   object cbxMenuWizard: TCheckBox
