@@ -4,7 +4,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    10 Nov 2014
+  @Date    27 Mar 2016
 
 **)
 Unit IDENotifierInterface;
@@ -14,7 +14,7 @@ Interface
 Uses
   ToolsAPI;
 
-{$INCLUDE CompilerDefinitions.inc}
+{$INCLUDE ..\..\..\Library\CompilerDefinitions.inc}
 
 Type
   (** A class to handle the IDENotifier interface. **)
@@ -53,9 +53,11 @@ Uses
   UtilityFunctions,
   ApplicationOptions;
 
+{$IFDEF D0005}
 Const
   (** A constant array represent true and false as strings. **)
   strBoolean : Array[False..True] Of String = ('False', 'True');
+{$ENDIF}
 
 {$IFDEF D0006}
 ResourceString
@@ -192,7 +194,8 @@ Const
     'ofnProjectDesktopSave',
     'ofnPackageInstalled',
     'ofnPackageUninstalled' {$IFDEF D0007},
-    'ofnActiveProjectChanged' {$ENDIF}
+    'ofnActiveProjectChanged' {$ENDIF} {$IFDEF DXE80}, // Dont have XE8 to check this so
+    'ofnProjectOpenedFromTemplate' {$ENDIF}            // may need to be changed to DXE100
   );
 
 Begin
