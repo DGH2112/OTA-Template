@@ -5,14 +5,14 @@
 
   @Author  David Hoyle
   @Version 1.0
-  @Date    26 Mar 2012
+  @Date    27 Mar 2016
 
 **)
 Unit MainMenuInterface;
 
 Interface
 
-{$INCLUDE 'CompilerDefinitions.inc'}
+{$INCLUDE '..\..\..\Library\CompilerDefinitions.inc'}
 
 Implementation
 
