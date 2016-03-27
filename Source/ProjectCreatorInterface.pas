@@ -5,7 +5,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    20 Feb 2012
+  @Date    27 Mar 2016
 
 **)
 Unit ProjectCreatorInterface;
@@ -16,7 +16,7 @@ Uses
   ToolsApi,
   RepositoryWizardForm;
 
-{$INCLUDE CompilerDefinitions.inc}
+{$INCLUDE ..\..\..\Library\CompilerDefinitions.inc}
 
 Type
   (** A class to handle the project creation within the IDE. **)
