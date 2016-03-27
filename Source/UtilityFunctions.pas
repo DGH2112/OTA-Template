@@ -5,7 +5,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    10 Nov 2014
+  @Date    27 Mar 2016
 
 **)
 Unit UtilityFunctions;
@@ -19,7 +19,7 @@ Uses
   Classes,
   Menus;
 
-{$INCLUDE CompilerDefinitions.inc}
+{$INCLUDE ..\..\..\Library\CompilerDefinitions.inc}
 
 Type
   (** This is a class which implements the IOTACustomMessage and
