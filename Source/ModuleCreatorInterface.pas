@@ -5,7 +5,7 @@
 
   @Author  David Hoyle
   @Version 1.0
-  @Date    23 Mar 2012
+  @Date    27 Mar 2016
 
 **)
 Unit ModuleCreatorInterface;
@@ -16,7 +16,7 @@ Uses
   ToolsAPI,
   RepositoryWizardForm;
 
-{$INCLUDE CompilerDefinitions.inc}
+{$INCLUDE ..\..\..\Library\CompilerDefinitions.inc}
 
 Type
   (** A class which implments the IOTAModuleCreator interface. **)
