@@ -5,7 +5,7 @@
 
   @Author  David Hoyle
   @Version 1.0
-  @Date    08 Mar 2012
+  @Date    27 Mar 2016
 
 **)
 Unit KeyboardBindingInterface;
@@ -16,7 +16,7 @@ Uses
   ToolsAPI,
   Classes;
 
-{$INCLUDE CompilerDefinitions.inc}
+{$INCLUDE ..\..\..\Library\CompilerDefinitions.inc}
 
 Type
   (** A class that implements the IOTAKeyboardBinding interface for handing keyboard
