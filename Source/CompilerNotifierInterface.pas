@@ -4,7 +4,7 @@
 
   @Author  David Hoyle
   @Version 1.0
-  @Date    24 Mar 2012
+  @Date    27 Mar 2016
 
 **)
 Unit CompilerNotifierInterface;
@@ -14,7 +14,7 @@ Interface
 Uses
   ToolsAPI;
 
-{$INCLUDE CompilerDefinitions.inc}
+{$INCLUDE ..\..\..\Library\CompilerDefinitions.inc}
 
 {$IFDEF D2010}
 Type
