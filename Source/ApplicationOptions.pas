@@ -4,7 +4,7 @@
   settings to an INI file.
 
   @Author  David Hoyle
-  @Date    24 Mar 2012
+  @Date    27 Mar 2016
   @Version 1.0
 
 **)
@@ -24,6 +24,7 @@ Type
   {$IFDEF D2005} Strict {$ENDIF} Private
     FAutoSaveInt : Integer;
     FPrompt      : Boolean;
+    FEnabled     : Boolean;
     FINIFileName : String;
     FModuleOps   : TModuleOptions;
   {$IFDEF D2005} Strict {$ENDIF} Protected
@@ -47,6 +48,13 @@ Type
       @return  a Boolean
     **)
     Property AutoSavePrompt : Boolean Read FPrompt Write FPrompt;
+    (**
+      This property determines whether the autosave functionality is enabled or disables.
+      @precon  None.
+      @postcon Gets or sets the enabled status of the autosave functionality.
+      @return  a Boolean
+    **)
+    Property AutoSaveEnabled : Boolean Read FEnabled Write FEnabled;
     (**
       This property determines which notifier output messages in the IDE.
       @precon  None.
@@ -120,6 +128,7 @@ Var
 Begin
   FAutoSaveInt := 300; // Default 300 seconds (5 minutes)
   FPrompt := True;     // Default to True
+  FEnabled := False;   // Default to False
   // Create INI file same as add module + '.INI'
   SetLength(FINIFileName, MAX_PATH);
   iSize := MAX_PATH;
@@ -163,6 +172,7 @@ Begin
     Try
       FAutoSaveInt := ReadInteger('Setup', 'AutoSaveInt', FAutoSaveInt);
       FPrompt := ReadBool('Setup', 'Prompt', FPrompt);
+      FEnabled := ReadBool('Setup', 'Enabled', FEnabled);
       Ops.iOps := 0;
       Ops.ModuleOps := [moShowCompilerMessages..moShowIDEMessages];
       Ops.iOps := ReadInteger('Setup', 'ModuleOptions', Ops.iOps);
@@ -190,6 +200,7 @@ Begin
     Try
       WriteInteger('Setup', 'AutoSaveInt', FAutoSaveInt);
       WriteBool('Setup', 'Prompt', FPrompt);
+      WriteBool('Setup', 'Enabled', FEnabled);
       Ops.ModuleOps := FModuleOps;
       WriteInteger('Setup', 'ModuleOptions', Ops.iOps);
     Finally
