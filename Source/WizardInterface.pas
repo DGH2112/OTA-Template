@@ -291,15 +291,18 @@ Var
   ASO : TApplicationOptions;
   iInt : Integer;
   bPrompt: Boolean;
+  boolEnabled : Boolean;
 
 Begin
   ASO := ApplicationOps;
   iInt := ASO.AutoSaveInt;
   bPrompt := ASO.AutoSavePrompt;
-  If TfrmOptions.Execute(iInt, bPrompt) Then
+  boolEnabled := ASO.AutoSaveEnabled;
+  If TfrmOptions.Execute(iInt, bPrompt, boolEnabled) Then
     Begin
       ASO.AutoSaveInt := iInt;
       ASO.AutoSavePrompt := bPrompt;
+      ASO.AutoSaveEnabled := boolEnabled;
       ASO.SaveSettings;
     End;
 End;
@@ -351,7 +354,8 @@ Begin
     If FCounter >= ApplicationOps.AutoSaveInt Then
       Begin
         FCounter := 0;
-        SaveModifiedFiles;
+        If ApplicationOps.AutoSaveEnabled Then
+          SaveModifiedFiles;
       End;
     If Not FSucceeded Then
       InstallMenu;
